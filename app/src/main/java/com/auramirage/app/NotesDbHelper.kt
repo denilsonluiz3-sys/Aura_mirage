@@ -1,0 +1,5 @@
+package com.auramirage.app
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+class NotesDbHelper(c:Context):SQLiteOpenHelper(c,"aura_mirage.db",null,1){override fun onCreate(db:SQLiteDatabase){db.execSQL("CREATE TABLE folders (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,parent_id INTEGER)");db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL,content TEXT NOT NULL,folder_id INTEGER,updated_at INTEGER NOT NULL,deleted_at INTEGER)");db.execSQL("CREATE TABLE documents (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,mime_type TEXT NOT NULL,uri TEXT,folder_id INTEGER,created_at INTEGER NOT NULL)");db.execSQL("CREATE TABLE revisions (id INTEGER PRIMARY KEY AUTOINCREMENT,note_id INTEGER NOT NULL,title TEXT NOT NULL,content TEXT NOT NULL,created_at INTEGER NOT NULL)");db.execSQL("INSERT INTO folders(name,parent_id) VALUES ('Notas',NULL),('Documentos',NULL),('Arquivos',NULL)")}override fun onUpgrade(db:SQLiteDatabase,o:Int,n:Int){}}
